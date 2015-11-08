@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :books, except: [:new, :edit]
 
   resources :profiles, except: [:new, :edit]
+
+  resources :messages, except: [:new, :edit]
 end

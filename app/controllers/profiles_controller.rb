@@ -1,7 +1,7 @@
 class ProfilesController < OpenReadController
     before_action :set_profile, only: [:update, :destroy]
 
-  # GET /books
+  # GET all profiles
   def index
     @profiles = Profile.all
 
