@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resources :profiles, except: [:new, :edit]
 
   resources :messages, except: [:new, :edit]
+
+  resources :plonks, except: [:new, :edit]
 end
