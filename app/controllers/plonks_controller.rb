@@ -6,12 +6,15 @@ class PlonksController < OpenReadController
   def index
     if params[:variety] then
       @plonk = Plonk.where(variety: params[:variety])
-      else if params[:city] then
-        @plonk = Plonk.where(city: params[:city])
-      else
-        @plonk = Plonk.all
+        else if params[:city] then
+          @plonk = Plonk.where(city: params[:city])
+            else if  params[:user_id] then
+              @plonk = Plonk.where(user_id: params[:user_id])
+            else
+              @plonk = Plonk.all
+          end
+        end
       end
-    end
 
     render json: @plonk
   end
