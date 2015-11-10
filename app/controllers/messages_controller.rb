@@ -1,5 +1,5 @@
 class MessagesController < OpenReadController
-    before_action :set_message, only: [:update, :destroy]
+  before_action :set_message, only: [:update]
 
   # GET all messages
   def index
@@ -43,21 +43,10 @@ class MessagesController < OpenReadController
 
   # DELETE message
   def destroy
-=begin
-    render json: {user_name: "string"}
-=begin
-    @messages = User.find(params[:id]).messages
-    render json: @messages
-    # @messages.destroy
+    current_user.messages.destroy current_user.messages
+    head :no_content
 
-    # us.messages.destroy us.messages
-    #current_user.messages.destroy current_user.messages
-
-
-   # head :no_content
-=end
   end
-
 
   def set_message
     @message = Message.find(params[:id])
