@@ -19,23 +19,17 @@ class MessagesController < OpenReadController
 
 # POST /messages
   def create
-    @message = Message.create(message_params)
-
-    # profile = profiles.find_by_user_name(message_params[:receiver_user_name])
-    # params[:user_id] = profile.user_id
     # save the user from typing in their username,   look it up and set field before save
-    #@user_name = User.find(message_params[:user_id]).profile.user_name
+    @profile = Profile.find_by_user_id(message_params[:user_id]).user_name
+    params[:message][:sender_user_name] = @profile
 
-    # @profile = User.find(params[:user_id]).profile
-    # @user_name = @profile[:user_name]
-    # render json: @user_name
 
+    @message = Message.create(message_params)
     if @message.save
       render json: @message, status: :created, location: @message
     else
       render json: @message.errors, status: :unprocessable_entity
     end
-
   end
 
 # PATCH message
@@ -49,10 +43,19 @@ class MessagesController < OpenReadController
 
   # DELETE message
   def destroy
+=begin
+    render json: {user_name: "string"}
+=begin
     @messages = User.find(params[:id]).messages
-    @messages.destroy
+    render json: @messages
+    # @messages.destroy
 
-    head :no_content
+    # us.messages.destroy us.messages
+    #current_user.messages.destroy current_user.messages
+
+
+   # head :no_content
+=end
   end
 
 
