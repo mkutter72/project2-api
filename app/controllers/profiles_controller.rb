@@ -17,9 +17,9 @@ class ProfilesController < OpenReadController
 
  # POST /profile
   def create
-    @profiles = current_user.create_profile(profile_params)
+    @profile = current_user.create_profile(profile_params)
 
-    if @profiles.save
+    if @profile.save
       render json: @profile, status: :created, location: @profile
     else
       render json: @profile.errors, status: :unprocessable_entity

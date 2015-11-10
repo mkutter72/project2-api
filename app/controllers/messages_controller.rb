@@ -9,9 +9,9 @@ class MessagesController < OpenReadController
   end
 
 
- # GET a single message
+ # GET changed functionality - get all messages associated with a user
   def show
-    @message = Message.find(params[:id])
+    @message = User.find(params[:id]).messages
 
     render json: @message
   end
@@ -19,10 +19,16 @@ class MessagesController < OpenReadController
 
 # POST /messages
   def create
+    @message = Message.create(message_params)
+
     # profile = profiles.find_by_user_name(message_params[:receiver_user_name])
     # params[:user_id] = profile.user_id
+    # save the user from typing in their username,   look it up and set field before save
+    #@user_name = User.find(message_params[:user_id]).profile.user_name
 
-    @message = Message.create(message_params)
+    # @profile = User.find(params[:user_id]).profile
+    # @user_name = @profile[:user_name]
+    # render json: @user_name
 
     if @message.save
       render json: @message, status: :created, location: @message
@@ -43,7 +49,8 @@ class MessagesController < OpenReadController
 
   # DELETE message
   def destroy
-    @message.destroy
+    @messages = User.find(params[:id]).messages
+    @messages.destroy
 
     head :no_content
   end
