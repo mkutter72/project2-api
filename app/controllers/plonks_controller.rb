@@ -39,18 +39,24 @@ class PlonksController < OpenReadController
   end
 
 
-  # PATCH message
+  # PATCH plonk
   def update
-    if @plonk.update(plonk_params)
+    if current_user.id == @plonk.user_id then
+      if @plonk.update(plonk_params)
+        head :no_content
+      else
+        render json: @plonk.errors, status: :unprocessable_entity
+      end
       head :no_content
-    else
-      render json: @plonk.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE message
+  # DELETE plonk
   def destroy
-    @plonk.destroy
+    #only delete the plonk if it belong to the current user
+    if current_user.id == @plonk.user_id then
+      @plonk.destroy
+    end
 
     head :no_content
   end
