@@ -7,6 +7,8 @@ class CreatePlonks < ActiveRecord::Migration
       t.integer :number_of_bottles
       t.decimal :price
       t.boolean :will_trade
+      t.string :city
+      t.string :zip_code
       t.references :user
 
       t.timestamps null: false

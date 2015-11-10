@@ -4,7 +4,14 @@ class PlonksController < OpenReadController
 
   # GET /plonk
   def index
-    @plonk = Plonk.all
+    if params[:variety] then
+      @plonk = Plonk.where(variety: params[:variety])
+      else if params[:city] then
+        @plonk = Plonk.where(city: params[:city])
+      else
+        @plonk = Plonk.all
+      end
+    end
 
     render json: @plonk
   end
@@ -51,7 +58,7 @@ class PlonksController < OpenReadController
 
 
   def plonk_params
-    params.require(:plonk).permit(:vineyard, :variety, :year, :number_of_bottles, :price, :will_trade, :user_id)
+    params.require(:plonk).permit(:vineyard, :variety, :year, :number_of_bottles, :price, :will_trade, :city, :zip_code,:user_id)
   end
 
   private :set_plonk, :plonk_params

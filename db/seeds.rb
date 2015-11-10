@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Message.delete_all
+Plonk.delete_all
 Profile.delete_all
 User.delete_all
 
@@ -24,3 +25,21 @@ user = User.create! email:"ted@aol.com", password:"t123"
 user.create_profile first_name:"Ted", last_name:"Spears", user_name:"Teddy",
                     street_address:"1324 Mass Ave", city:"Boston",
                     state:"MA", zip_code:"02118"
+
+
+
+Plonk.create!    vineyard:"Sebastiani", variety:"Chardonnay", year:2011,
+                number_of_bottles: 8, price: 5.50, will_trade: true,
+                city: "Boston", zip_code: "02130"
+Plonk.create!    vineyard:"Sebastiani", variety:"Pinot Noir", year:2011,
+                number_of_bottles: 8, price: 5.50, will_trade: true,
+                city: "Boston", zip_code: "02130"
+Plonk.create!    vineyard:"Sebastiani", variety:"Pinot Blanc", year:2011,
+                number_of_bottles: 8, price: 5.50, will_trade: true,
+                city: "Chicago", zip_code: "02130"
+Plonk.create!    vineyard:"Bully Hill", variety:"Chardonnay", year:2011,
+                number_of_bottles: 8, price: 5.50, will_trade: true,
+                city: "Chicago", zip_code: "02130"
+Plonk.create!    vineyard:"Bully Hill", variety:"Cabernet", year:2011,
+                number_of_bottles: 8, price: 5.50, will_trade: true,
+                city: "Chicago", zip_code: "02130"

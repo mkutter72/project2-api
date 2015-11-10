@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20151109005031) do
     t.integer  "number_of_bottles"
     t.decimal  "price"
     t.boolean  "will_trade"
+    t.string   "city"
+    t.string   "zip_code"
     t.integer  "user_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
