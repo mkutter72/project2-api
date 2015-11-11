@@ -20,8 +20,8 @@ class MessagesController < OpenReadController
 # POST /messages
   def create
     # save the user from typing in their username,   look it up and set field before save
-    @profile = Profile.find_by_user_id(message_params[:user_id]).user_name
-    params[:message][:sender_user_name] = @profile
+    @user_name = Profile.find_by_user_id(message_params[:user_id]).user_name
+    params[:message][:sender_user_name] = @user_name
 
 
     @message = Message.create(message_params)

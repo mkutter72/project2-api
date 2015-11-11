@@ -28,6 +28,8 @@ class PlonksController < OpenReadController
 
 # POST /plonks
   def create
+    params[:plonk][:city] = current_user.profile.city
+    params[:plonk][:zip_code] = current_user.profile.zip_code
     @plonk = Plonk.create(plonk_params)
 
     if @plonk.save
@@ -35,7 +37,6 @@ class PlonksController < OpenReadController
     else
       render json: @plonk.errors, status: :unprocessable_entity
     end
-
   end
 
 
