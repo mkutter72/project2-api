@@ -1,64 +1,88 @@
+# README For The Plonk Exchange - Backend Portion of the Project
 
-# User authentication
+For general information and details on the UI portion of this project see
 
-## Register
 
-```
-curl --include --request POST --header "Content-Type: application/json" -d '{
-  "credentials": {
-    "email": "an@example.email",
-    "password": "an example password",
-    "password_confirmation": "an example password"
-  }
-}' http://localhost:3000/register
-```
+## Table Definitions for Database
+###Tables for User and User Authentication
+These tables, models and routers originate from https://github.com/gaand/project2-api
 
-## Login
+###Table for Profile
 
-```
-curl --request POST --header "Content-Type: application/json" -d '{
-  "credentials": {
-    "email": "an@example.email",
-    "password": "an example password"
-  }
-}' http://localhost:3000/login
-```
+| Column | Type |
+| :----- | :--- |
+| id | INTEGER |
+| first_name | CHARACTER VARYING |
+| last_name | CHARACTER VARYING |
+| street_address | CHARACTER VARYING |
+| city | CHARACTER VARYING |
+| state| CHARACTER VARYING |
+| zip_code| INTEGER |
+| user_name | CHARACTER VARYING, must be unique|
+| foreign key | Reference to User |
+| updated_at | TIMESTAMP WITHOUT TIME ZONE |
+| created_at | TIMESTAMP WITHOUT TIME ZONE |
 
-## Logout
+####Validations and Constraints for Profile
+* user_name, city and zip_code must be filled in
+* user_name must be unique
 
-```
-curl --request DELETE --header "Authorization: Token token=c017d611187e3350baffc52d35a4df69" http://localhost:3000/logout/1
-```
 
-# Users
 
-## List
+###Table for Plonk
 
-```
-curl --header "Authorization: Token token=c017d611187e3350baffc52d35a4df69" http://localhost:3000/users
-```
+| Column | Type |
+| :----- | :--- |
+| id | INTEGER |
+| vineyard | CHARACTER VARYING |
+| variety | CHARACTER VARYING |
+| year | INTEGER |
+| number_of_bottles | INTEGER |
+| city | CHARACTER VARYING |
+| price | DECIMAL |
+| will_trade | BOOLEAN |
+| foreign key | Reference to User |
+| updated_at | TIMESTAMP WITHOUT TIME ZONE |
+| created_at | TIMESTAMP WITHOUT TIME ZONE |
 
-# Books
+####Validations and Constraints for
+* vineyard, variety, year, number_of_bottles, city, price and will_trade must be filled in
 
-## List
 
-```
-curl --header "Authorization: Token token=c017d611187e3350baffc52d35a4df69" http://localhost:3000/users
-```
+###Table for Message
 
-**OR**
+| Column | Type |
+| :----- | :--- |
+| id | INTEGER |
+| sender_user_name | CHARACTER VARYING |
+| receiver_user_name | CHARACTER VARYING |
+| plonk_message| CHARACTER VARYING |
+| foreign key | Reference to User |
+| updated_at | TIMESTAMP WITHOUT TIME ZONE |
+| created_at | TIMESTAMP WITHOUT TIME ZONE |
 
-```
-curl http://localhost:3000/users
-```
+####Validations and Constraints for Message
+* sender_user_name, receiver_user_name and  plonk_message must be filled in
 
-## Create
 
-```
-curl --request POST --header "Authorization: Token token=be249dc0231396806f24c953cafae03a" --header "Content-Type: application/json" -d '{
-  "book": {
-    "title":"The Hold",
-    "isbn":"abc123def456"
-  }
-}'  http://localhost:3000/books
-```
+
+###Associations
+* User is the parent of Message.  User has many messages.   A message belongs to a User
+* User is the parent of a Plonk Ad.  User has many Plonk Ads.   A Plonk Ad belongs to a User
+
+
+
+###ActiveRecord operations
+* Finding a particular user by user_name  user = User.find_by(user_name: 'mkutter72')
+* Getting all messages for user     user.messages
+* Creating a new message for user   user.message.create!()
+* Clearing the list of messages - want to delete messages as well - how?
+* Finding Plonk based on city   plonk_list = Plonk.find_by(city: 'Boston')
+* Finding Plonk based on type  plonk_list = Plonk.find_by(type: 'Cabernet')
+* Finding a User to send a message to based on Plonk ad    user = plonk.user.username
+
+
+
+
+###Authorization and Authentication
+User authorization and authentication is provided by the project2-api repo that Antony Donovan created.
