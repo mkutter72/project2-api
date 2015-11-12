@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20151109005031) do
     t.boolean  "will_trade"
     t.string   "city"
     t.string   "zip_code"
+    t.string   "user_name"
     t.integer  "user_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false

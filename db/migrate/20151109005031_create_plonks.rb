@@ -9,6 +9,7 @@ class CreatePlonks < ActiveRecord::Migration
       t.boolean :will_trade
       t.string :city
       t.string :zip_code
+      t.string :user_name
       t.references :user
 
       t.timestamps null: false

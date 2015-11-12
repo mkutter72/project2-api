@@ -30,6 +30,7 @@ class PlonksController < OpenReadController
   def create
     params[:plonk][:city] = current_user.profile.city
     params[:plonk][:zip_code] = current_user.profile.zip_code
+    params[:plonk][:user_name] = current_user.profile.user_name
     @plonk = Plonk.create(plonk_params)
 
     if @plonk.save
@@ -68,7 +69,7 @@ class PlonksController < OpenReadController
 
 
   def plonk_params
-    params.require(:plonk).permit(:vineyard, :variety, :year, :number_of_bottles, :price, :will_trade, :city, :zip_code,:user_id)
+    params.require(:plonk).permit(:vineyard, :variety, :year, :number_of_bottles, :price, :will_trade, :city, :zip_code,:user_id, :user_name)
   end
 
   private :set_plonk, :plonk_params
