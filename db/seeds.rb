@@ -30,16 +30,16 @@ user.create_profile first_name:"Ted", last_name:"Spears", user_name:"Teddy",
 
 Plonk.create!    vineyard:"Sebastiani", variety:"Chardonnay", year:2011,
                 number_of_bottles: 8, price: 5.50, will_trade: true,
-                city: "Boston", zip_code: "02130", user_id: 1
+                city: "Boston", zip_code: "02130", user_id: 1, user_name: "mkutter72"
 Plonk.create!    vineyard:"Sebastiani", variety:"Pinot Noir", year:2011,
                 number_of_bottles: 8, price: 5.50, will_trade: true,
-                city: "Boston", zip_code: "02130",  user_id: 2
+                city: "Boston", zip_code: "02130",  user_id: 2, user_name: "alanB"
 Plonk.create!    vineyard:"Sebastiani", variety:"Pinot Blanc", year:2011,
                 number_of_bottles: 8, price: 5.50, will_trade: true,
-                city: "Chicago", zip_code: "02130", user_id: 3
+                city: "Chicago", zip_code: "02130", user_id: 3, user_name: "Teddy"
 Plonk.create!    vineyard:"Bully Hill", variety:"Chardonnay", year:2011,
                 number_of_bottles: 8, price: 5.50, will_trade: true,
-                city: "Chicago", zip_code: "02130", user_id: 3
+                city: "Chicago", zip_code: "02130", user_id: 3, user_name: "Teddy"
 Plonk.create!    vineyard:"Bully Hill", variety:"Cabernet", year:2011,
                 number_of_bottles: 8, price: 5.50, will_trade: true,
-                city: "Chicago", zip_code: "02130", user_id: 3
+                city: "Chicago", zip_code: "02130", user_id: 3,user_name: "Teddy"

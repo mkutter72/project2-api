@@ -21,10 +21,15 @@ class MessagesController < OpenReadController
   def create
     # save the user from typing in their username,   look it up and set field before save
     @user_name = Profile.find_by_user_id(message_params[:user_id]).user_name
+
+    if params[:message][:sender_user_name] == "copy" then
+      @receiver_id = Profile.find_by_user_name(message_params[:receiver_user_name]).user_id
+      params[:message][:user_id] =  @receiver_id
+    end
+
     params[:message][:sender_user_name] = @user_name
-
-
     @message = Message.create(message_params)
+
     if @message.save
       render json: @message, status: :created, location: @message
     else
