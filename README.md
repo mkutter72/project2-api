@@ -20,7 +20,7 @@ These tables, models and routers originate from https://github.com/gaand/project
 | state| CHARACTER VARYING |
 | zip_code| INTEGER |
 | user_name | CHARACTER VARYING, must be unique|
-| foreign key | Reference to User |
+| user_id | Reference to User |
 | updated_at | TIMESTAMP WITHOUT TIME ZONE |
 | created_at | TIMESTAMP WITHOUT TIME ZONE |
 
@@ -42,6 +42,8 @@ These tables, models and routers originate from https://github.com/gaand/project
 | city | CHARACTER VARYING |
 | price | DECIMAL |
 | will_trade | BOOLEAN |
+| user_name | CHARACTER VARYING|
+| user_id | Reference to User |
 | foreign key | Reference to User |
 | updated_at | TIMESTAMP WITHOUT TIME ZONE |
 | created_at | TIMESTAMP WITHOUT TIME ZONE |
@@ -58,13 +60,15 @@ These tables, models and routers originate from https://github.com/gaand/project
 | sender_user_name | CHARACTER VARYING |
 | receiver_user_name | CHARACTER VARYING |
 | plonk_message| CHARACTER VARYING |
-| foreign key | Reference to User |
+| user_id | Reference to User |
 | updated_at | TIMESTAMP WITHOUT TIME ZONE |
 | created_at | TIMESTAMP WITHOUT TIME ZONE |
 
 ####Validations and Constraints for Message
 * sender_user_name, receiver_user_name and  plonk_message must be filled in
 
+Note - the phase I implementation approach for messages is that each message
+is copied and one is owned by the sender and the other is owned by the receiver. It was implemented this way so each user has it's own message list so that when a user clears their list the other user won't lose the messages.   In a future phase the implementation may change to use a single message which is linked to both users and it is deleted only when each owner has cleared it.
 
 
 ###Associations
@@ -73,7 +77,7 @@ These tables, models and routers originate from https://github.com/gaand/project
 
 
 
-###ActiveRecord operations
+###ActiveRecord operations (for planning purposes,  may not be a complete list)
 * Finding a particular user by user_name  user = User.find_by(user_name: 'mkutter72')
 * Getting all messages for user     user.messages
 * Creating a new message for user   user.message.create!()
