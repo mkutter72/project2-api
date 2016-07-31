@@ -13,6 +13,13 @@ class ProfilesController < OpenReadController
     @profiles = Profile.find(params[:id])
 
     value = (@profiles.user_id == params[:id])
+    var1 = @profiles.user_id
+    var2 = params[:id]
+
+    if var1 == var2
+      puts "they match"
+    else
+      puts "they don't match"
 
     puts "profile INFO::: #{@profiles.user_id} #{params[:id]} #{value}"
 
