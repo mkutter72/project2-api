@@ -12,9 +12,11 @@ class ProfilesController < OpenReadController
   def show
     @profiles = Profile.find(params[:id])
 
-    puts "profile INFO::: #{@profiles.user_id} #{params[:id]}"
+    value = (@profiles.user_id == params[:id])
 
-    if @profiles.user_id === params[:id]
+    puts "profile INFO::: #{@profiles.user_id} #{params[:id]} #{value}"
+
+    if @profiles.user_id == params[:id]
       render json: @profiles
     else
       render json: "error", status: :unprocessable_entity
