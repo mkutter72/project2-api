@@ -14,10 +14,10 @@ class ProfilesController < OpenReadController
 
     puts "profile INFO::: #{@profiles.user_id} #{params[:id]}"
 
-    if @profiles.user_id == params[:id]
+    if @profiles.user_id === params[:id]
       render json: @profiles
     else
-      render json: @profile.errors, status: :unprocessable_entity
+      render json: "error", status: :unprocessable_entity
     end
   end
 
