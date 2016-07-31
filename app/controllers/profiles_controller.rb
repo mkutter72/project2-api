@@ -12,7 +12,7 @@ class ProfilesController < OpenReadController
   def show
     @profiles = Profile.find(params[:id])
 
-    puts "profile #{@profiles.user_id}"
+    puts "profile INFO::: #{@profiles.user_id} #{params[:id]}"
 
     render json: @profiles
   end
