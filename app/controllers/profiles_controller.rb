@@ -10,7 +10,7 @@ class ProfilesController < OpenReadController
 
  # GET a single profile
   def show
-    @profiles = Profile.find(params[:id])
+    @profiles = Profile.where(user_id: params[:id])
 
     render json: @profiles
   end
