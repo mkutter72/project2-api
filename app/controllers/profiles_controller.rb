@@ -10,11 +10,9 @@ class ProfilesController < OpenReadController
 
  # GET a single profile
   def show
-    if @profiles = Profile.find(params[:id])
-      render json: @profiles
-    else
-      render json: "error", status: :unprocessable_entity
-    end
+    @profiles = Profile.where(user_id: params[:id])
+
+    render json: @profiles
   end
 
  # POST /profile
